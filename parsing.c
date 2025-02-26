@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rboulaga <rboulaga@students.1337.ma>       +#+  +:+       +#+        */
+/*   By: rabia <rabia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 10:41:53 by rboulaga          #+#    #+#             */
-/*   Updated: 2025/02/22 12:23:05 by rboulaga         ###   ########.fr       */
+/*   Updated: 2025/02/24 18:03:02 by rabia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include <unistd.h>
 
 int file_exists(char *file, t_data *data)
 {
@@ -60,16 +61,29 @@ void	check_extension(char *av, t_data *data)
 
 void parsing(int ac, char **av, t_data *data)
 {
-	// int i;
+	int i;
+	ssize_t ret;
+	ret = 0;
 
-	// i = 0;
+	int j = 0;
+	i = 0;
 	if (ac == 2)
 	{
 		check_extension(av[1], data);
 		data->len = file_exists(av[1], data);
-		data->file = av[1];
-		
-		printf ("all is good \n");
+		data_extraction(av[1], data);
+		while(data->map[j])
+		{
+			while(data->map[j][i])
+			{
+				ret = write(1, &data->map[1][i], 1);
+				i++;
+			}
+			i = 0;
+			j++;
+		}	
+		(void)ret;
+		// printf("all is good \n");
 		exit(0);
 	}
 	my_exit(data, "Invalid number of arguments\n");

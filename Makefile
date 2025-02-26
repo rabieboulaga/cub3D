@@ -22,7 +22,7 @@ $(LIBFT):
 	make -C $(LIBFT_DIR)
 
 $(NAME): $(OBJ) $(LIBFT)
-	$(CC) $(CFLAGS) $(OBJ) -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux \
+	$(CC) $(CFLAGS) $(OBJ) -Lmlx_linux -lmlx -L/usr/lib -Imlx_linux \
 		-lXext -lX11 -lm -lz -L$(LIBFT_DIR) -lft -o $(NAME)
 
 %.o : %.c

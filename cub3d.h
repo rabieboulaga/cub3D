@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rboulaga <rboulaga@students.1337.ma>       +#+  +:+       +#+        */
+/*   By: rabia <rabia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 14:39:57 by rboulaga          #+#    #+#             */
-/*   Updated: 2025/02/22 12:21:51 by rboulaga         ###   ########.fr       */
+/*   Updated: 2025/02/24 13:41:09 by rabia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ char	*ft_strchrr(char *s, int c);
 size_t	ft_strlenn(char *str);
 char	*ft_strdupp(char *s);
 void	my_exit(t_data *data, char *str);
+void	data_extraction(char *file, t_data *data);
 
 
 
