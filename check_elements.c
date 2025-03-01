@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   check_elements.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rboulaga <rboulaga@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: rabia <rabia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/17 14:38:48 by rboulaga          #+#    #+#             */
-/*   Updated: 2025/02/17 14:38:48 by rboulaga         ###   ########.fr       */
+/*   Created: 2025/02/26 23:18:13 by rabia             #+#    #+#             */
+/*   Updated: 2025/02/28 16:28:19 by rabia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int main(int ac, char **av)
-{
-	t_data	*data;
-	t_map	*map;
+// void    check_elements(t_data *data)
+// {
+//     int i;
 
-	data = malloc(sizeof(t_data));
-	map = malloc(sizeof(t_map));
-	ft_memset(data, 0, sizeof(t_data));
-	ft_memset(map, 0, sizeof(t_map));
-	parsing(ac, av, data, map);
-}
-
-
+//     i = 0;
+//     while(data->map[i])
+//     {
+//         if (!ft_strncmp(data->map[i], "NO ", 2))
+            
+        
+//         i++;        
+//     }
+// }

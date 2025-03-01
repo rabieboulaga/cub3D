@@ -6,7 +6,7 @@
 /*   By: rabia <rabia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 10:41:53 by rboulaga          #+#    #+#             */
-/*   Updated: 2025/02/24 18:03:02 by rabia            ###   ########.fr       */
+/*   Updated: 2025/02/28 16:51:05 by rabia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,31 +59,17 @@ void	check_extension(char *av, t_data *data)
 		my_exit(data, "invalid extension\n");
 }
 
-void parsing(int ac, char **av, t_data *data)
+void parsing(int ac, char **av, t_data *data, t_map *map)
 {
-	int i;
-	ssize_t ret;
-	ret = 0;
 
-	int j = 0;
-	i = 0;
+	// int j = 0;
+	
 	if (ac == 2)
 	{
 		check_extension(av[1], data);
 		data->len = file_exists(av[1], data);
-		data_extraction(av[1], data);
-		while(data->map[j])
-		{
-			while(data->map[j][i])
-			{
-				ret = write(1, &data->map[1][i], 1);
-				i++;
-			}
-			i = 0;
-			j++;
-		}	
-		(void)ret;
-		// printf("all is good \n");
+		data_extraction(av[1], data, map);
+		// check_elements(data);
 		exit(0);
 	}
 	my_exit(data, "Invalid number of arguments\n");

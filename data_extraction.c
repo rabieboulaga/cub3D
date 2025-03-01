@@ -6,25 +6,35 @@
 /*   By: rabia <rabia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 12:19:45 by rboulaga          #+#    #+#             */
-/*   Updated: 2025/02/24 18:56:57 by rabia            ###   ########.fr       */
+/*   Updated: 2025/02/28 19:42:25 by rabia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	skip_empty_lines(char **str)
-{
-	int i;
-	int j;
+// void	skip_empty_lines(char **str)
+// {
+// 	int i;
+// 	int j;
 
-	i = 0;
-	j = 0;
-	while(str[i])
-	{
-		if (ft_strlen(str[i]) == 1 && str[i][0] == '\n')
-			j++;
+// 	i = 0;
+// 	j = 0;
+// 	while(str[i])
+// 	{
+// 		if (ft_strlen(str[i]) == 1 && str[i][0] == '\n')
+// 			j++;
 		
-	}
+// 	}
+// }
+
+void	get_elements(t_map *map, char *line)
+{
+	t_map *newnode;
+
+	newnode = (t_map *)malloc(sizeof(t_map));
+	if (!map)
+		ft_lstadd_front(map, newnode);
+	ft_lstadd_back(map, newnode);
 }
 
 int	remove_newline(char **str)
@@ -49,21 +59,27 @@ int	remove_newline(char **str)
 	return (len);
 }
 
-void	data_extraction(char *file, t_data *data)
+void	data_extraction(char *file, t_data *data, t_map *map)
 {
     int i;
 
     i = 0;
 	data->fd = open(file, O_RDONLY);
-	printf("the len = %d\n", data->len);
-    data->map = malloc(sizeof(char *) * data->len);
-	data->map[i] = get_next_line(data->fd);
-	while (data->map[i])
-	{
-		i++;
-		data->map[i] = get_next_line(data->fd);
-	}
+		
 	close(data->fd);
 	
 	// remove_newline(data->map);
 }
+
+
+
+
+
+// data->map1 = malloc(sizeof(char *) * data->len);
+// 	data->map1[i] = get_next_line(data->fd);
+// 	while (data->map1[i])
+// 	{
+// 		i++;
+// 		data->map1[i] = get_next_line(data->fd);
+// 	}
+// 	data->map1[i] = '\0';
