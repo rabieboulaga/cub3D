@@ -6,7 +6,7 @@
 /*   By: rboulaga <rboulaga@students.1337.ma>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 12:19:45 by rboulaga          #+#    #+#             */
-/*   Updated: 2025/03/01 11:52:17 by rboulaga         ###   ########.fr       */
+/*   Updated: 2025/03/01 12:32:17 by rboulaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,37 +33,40 @@ void	get_elements(t_map *map, char *str)
 
 	newnode = (t_map *)malloc(sizeof(t_map));
 	newnode->line = ft_strdup(str);
+	// (void)str;
 	if (!map)
 		map_add_front(&map, newnode);
 	map_add_back(&map, newnode);
 }
 
-int	remove_newline(char **str)
-{
-	int	i;
-	int	j;
-	int	len;
+// int	remove_newline(char **str)
+// {
+// 	int	i;
+// 	int	j;
+// 	int	len;
 
-	j = 0;
-	len = 0;
-	while (str && str[len])
-		len++;
-	while (str && str[j])
-	{
-		if (len - 1 == j)
-			break ;
-		i = ft_strlen(str[j]);
-		if (i > 1)
-			str[j][i - 1] = '\0';
-		j++;
-	}
-	return (len);
-}
+// 	j = 0;
+// 	len = 0;
+// 	while (str && str[len])
+// 		len++;
+// 	while (str && str[j])
+// 	{
+// 		if (len - 1 == j)
+// 			break ;
+// 		i = ft_strlen(str[j]);
+// 		if (i > 1)
+// 			str[j][i - 1] = '\0';
+// 		j++;
+// 	}
+// 	return (len);
+// }
 
 void	data_extraction(char *file, t_data *data, t_map *map)
 {
+	// int i;
 	char *str;
 
+	// i = 0;
 	data->fd = open(file, O_RDONLY);
 	map->line = get_next_line(data->fd);
 	str = get_next_line(data->fd);
@@ -74,6 +77,11 @@ void	data_extraction(char *file, t_data *data, t_map *map)
 		get_elements(map, str);
 	}
 	close(data->fd);
+	// while (map->next)
+	// {
+		// printf("%s\n", map->line);
+		// map = map->next;
+	// }
 
 	// remove_newline(data->map);
 }
