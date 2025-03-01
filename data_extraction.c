@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data_extraction.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rabia <rabia@student.42.fr>                +#+  +:+       +#+        */
+/*   By: rboulaga <rboulaga@students.1337.ma>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 12:19:45 by rboulaga          #+#    #+#             */
-/*   Updated: 2025/02/28 19:42:25 by rabia            ###   ########.fr       */
+/*   Updated: 2025/03/01 11:52:17 by rboulaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,18 +23,19 @@
 // 	{
 // 		if (ft_strlen(str[i]) == 1 && str[i][0] == '\n')
 // 			j++;
-		
+
 // 	}
 // }
 
-void	get_elements(t_map *map, char *line)
+void	get_elements(t_map *map, char *str)
 {
 	t_map *newnode;
 
 	newnode = (t_map *)malloc(sizeof(t_map));
+	newnode->line = ft_strdup(str);
 	if (!map)
-		ft_lstadd_front(map, newnode);
-	ft_lstadd_back(map, newnode);
+		map_add_front(&map, newnode);
+	map_add_back(&map, newnode);
 }
 
 int	remove_newline(char **str)
@@ -61,13 +62,19 @@ int	remove_newline(char **str)
 
 void	data_extraction(char *file, t_data *data, t_map *map)
 {
-    int i;
+	char *str;
 
-    i = 0;
 	data->fd = open(file, O_RDONLY);
-		
+	map->line = get_next_line(data->fd);
+	str = get_next_line(data->fd);
+	while(str)
+	{
+		free(str);
+		str = get_next_line(data->fd);
+		get_elements(map, str);
+	}
 	close(data->fd);
-	
+
 	// remove_newline(data->map);
 }
 

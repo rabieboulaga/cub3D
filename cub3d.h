@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rabia <rabia@student.42.fr>                +#+  +:+       +#+        */
+/*   By: rboulaga <rboulaga@students.1337.ma>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 14:39:57 by rboulaga          #+#    #+#             */
-/*   Updated: 2025/02/28 19:27:15 by rabia            ###   ########.fr       */
+/*   Updated: 2025/03/01 10:48:37 by rboulaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,9 @@ char	*ft_strdupp(char *s);
 void	my_exit(t_data *data, char *str);
 void	data_extraction(char *file, t_data *data, t_map *map);
 // void    check_elements(t_data *data);
+t_map	*map_lstlast(t_map *lst);
+void	map_add_front(t_map **lst, t_map *new);
+void	map_add_back(t_map **lst, t_map *new);
 
 
 
