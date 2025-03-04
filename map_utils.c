@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rboulaga <rboulaga@students.1337.ma>       +#+  +:+       +#+        */
+/*   By: rabia <rabia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 10:28:46 by rboulaga          #+#    #+#             */
-/*   Updated: 2025/03/01 12:15:27 by rboulaga         ###   ########.fr       */
+/*   Updated: 2025/03/01 17:52:27 by rabia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_map	*map_lstlast(t_map *lst)
 {
 	if (!lst)
 		return (NULL);
-	while (lst->next)
+	while ( lst->next)
 	{
 		lst = lst->next;
 	}
