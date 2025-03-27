@@ -9,7 +9,9 @@ SRC = main.c\
 	get_next_line_utils.c\
 	data_extraction.c\
 	map_utils.c\
+	parse_elements.c\
 	# check_elements.c\
+
 
 OBJ = $(SRC:.c=.o)
 

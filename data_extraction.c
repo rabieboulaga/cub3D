@@ -6,15 +6,23 @@
 /*   By: rboulaga <rboulaga@students.1337.ma>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 12:19:45 by rboulaga          #+#    #+#             */
-/*   Updated: 2025/03/07 21:35:29 by rboulaga         ###   ########.fr       */
+/*   Updated: 2025/03/23 10:23:35 by rboulaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+// void	check_elements(t_map *map)
+// {
+	// int i;
+//
+	// i = 0;
+	// while (map->next && map->type != MAPP)
+// }
+
 int	my_cmp(char *s1, char *s2, size_t n)
 {
-	size_t			i;
+	size_t		i;
 
 	i = 0;
 	while (*s2 && *s2 == ' ')
@@ -34,7 +42,21 @@ void	type_definition(t_map *map)
 	while (map->next)
 	{
 		if(!my_cmp("NO ", map->line, 3))
-			printf(" line = %s : all is good\n", map->line);
+			map->type = NO;
+		else if(!my_cmp("SO ", map->line, 3))
+			map->type = SO;
+		else if (!my_cmp("WE ", map->line, 3))
+			map->type = WE;
+		else if(!my_cmp("EA ", map->line, 3))
+			map->type = EA;
+		else if (!my_cmp("F ", map->line, 2))
+			map->type = F;
+		else if (!my_cmp("C ", map->line, 2))
+			map->type = C;
+		else if (!my_cmp("1", map->line, 1))
+			map->type = MAPP;
+		else
+			map->type = EMPTY;// i need to check that (go back)
 		map = map->next;
 	}
 }
@@ -45,6 +67,7 @@ void	get_elements(t_map *map, char *str)
 
 	newnode = (t_map *)malloc(sizeof(t_map));
 	newnode->line = ft_strdup(str);
+	newnode->flag = 0;
 	newnode->next = NULL;
 	if (!map)
 		map_add_front(&map, newnode);
@@ -59,20 +82,17 @@ void	data_extraction(char *file, t_data *data, t_map *map)
 
 	data->fd = open(file, O_RDONLY);
 	map->line = get_next_line(data->fd);
-	str = get_next_line(data->fd);
+	str = map->line;
 	while(str)
 	{
-		free(str);
 		str = get_next_line(data->fd);
 		get_elements(map, str);
+		free(str);
 	}
 	type_definition(map);
-
-	// while (map->next)
-	// {
-	// 	printf("%s\n", map->line);
-	// 	map = map->next;
-	// }
+	check_number_of_elements(map, data);
+	check_it(map, data);
+	check_arranging(data, map);
 	close(data->fd);
 }
 

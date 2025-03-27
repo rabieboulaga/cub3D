@@ -6,7 +6,7 @@
 /*   By: rboulaga <rboulaga@students.1337.ma>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 14:39:57 by rboulaga          #+#    #+#             */
-/*   Updated: 2025/03/01 10:48:37 by rboulaga         ###   ########.fr       */
+/*   Updated: 2025/03/23 10:23:05 by rboulaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,21 +24,23 @@
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 1000
 
-typedef enum e_token {
-    NO,   // north texture
-    SO,   // south texture
-    WE,   // west texture
-    EA,   // east texture
-    F,    // floor color
-    C,    // ceiling color
-    MAPP,  // map data
-    EMPTY, // IMPTY LINE
+typedef enum e_token
+{
+    NO,   // north texture 0
+    SO,   // south texture 1
+    WE,   // west texture 2
+    EA,   // east texture 3
+    F,    // floor color 4
+    C,    // ceiling color 5
+    MAPP,  // map data 6
+    EMPTY, // IMPTY LINE 7
 } t_token;
 
 typedef struct c_map
 {
 	t_token type;
 	char *line;
+	int	flag;
 	struct c_map *next;
 }	t_map;
 
@@ -51,6 +53,14 @@ typedef struct c_data
 	int fd;
 	int len;
 	char *file;
+	int flag_no;
+    int flag_so;
+    int flag_we;
+    int flag_ea;
+    int flag_f;
+    int flag_c;
+	int flag_mapp;
+	int flag_empty;
 
 }	t_data;
 
@@ -67,6 +77,10 @@ void	data_extraction(char *file, t_data *data, t_map *map);
 t_map	*map_lstlast(t_map *lst);
 void	map_add_front(t_map **lst, t_map *new);
 void	map_add_back(t_map **lst, t_map *new);
+void	check_number_of_elements(t_map *map, t_data *data);
+int		my_cmp(char *s1, char *s2, size_t n);
+void	check_it(t_map *map, t_data *data);
+void	check_arranging(t_data *data, t_map *map);
 
 
 

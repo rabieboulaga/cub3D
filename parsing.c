@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rabia <rabia@student.42.fr>                +#+  +:+       +#+        */
+/*   By: rboulaga <rboulaga@students.1337.ma>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 10:41:53 by rboulaga          #+#    #+#             */
-/*   Updated: 2025/02/28 16:51:05 by rabia            ###   ########.fr       */
+/*   Updated: 2025/03/18 01:10:13 by rboulaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,13 +63,15 @@ void parsing(int ac, char **av, t_data *data, t_map *map)
 {
 
 	// int j = 0;
-	
+
 	if (ac == 2)
 	{
 		check_extension(av[1], data);
 		data->len = file_exists(av[1], data);
 		data_extraction(av[1], data, map);
+		
 		// check_elements(data);
+		printf("all is good\n");
 		exit(0);
 	}
 	my_exit(data, "Invalid number of arguments\n");
