@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_elements.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rboulaga <rboulaga@students.1337.ma>       +#+  +:+       +#+        */
+/*   By: rabia <rabia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 07:36:44 by rboulaga          #+#    #+#             */
-/*   Updated: 2025/03/23 10:47:59 by rboulaga         ###   ########.fr       */
+/*   Updated: 2025/03/30 15:58:21 by rabia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,18 @@ void	check_arranging(t_data *data, t_map *map)
 			|| map->type == WE || map->type == EA
 			|| map->type == F || map->type == C)
 			i++;
+		else if (map->type == NOTHING)
+		{
+			free_map(tmp);
+			my_exit(data, "Invalid element in configuration file\n");
+		}
 		map = map->next;
 	}
 	if (i != 6)
 	{
 		free_map(tmp);
-		my_exit(data, "Map content must be the last element in the file");
+		my_exit(data, "Map content must be the last element in the file\n");
 	}
-
 }
 
 void	check_it(t_map *map, t_data *data)

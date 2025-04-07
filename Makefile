@@ -10,6 +10,7 @@ SRC = main.c\
 	data_extraction.c\
 	map_utils.c\
 	parse_elements.c\
+	take_map.c\
 	# check_elements.c\
 
 

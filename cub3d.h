@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rboulaga <rboulaga@students.1337.ma>       +#+  +:+       +#+        */
+/*   By: rabia <rabia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 14:39:57 by rboulaga          #+#    #+#             */
-/*   Updated: 2025/03/23 10:23:05 by rboulaga         ###   ########.fr       */
+/*   Updated: 2025/04/06 09:21:33 by rabia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef enum e_token
     C,    // ceiling color 5
     MAPP,  // map data 6
     EMPTY, // IMPTY LINE 7
+	NOTHING, // NULL 8
 } t_token;
 
 typedef struct c_map
@@ -81,6 +82,8 @@ void	check_number_of_elements(t_map *map, t_data *data);
 int		my_cmp(char *s1, char *s2, size_t n);
 void	check_it(t_map *map, t_data *data);
 void	check_arranging(t_data *data, t_map *map);
+void    take_map(t_data *data, t_map *map);
+void 	free_map(t_map *map);
 
 
 

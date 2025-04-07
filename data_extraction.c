@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data_extraction.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rboulaga <rboulaga@students.1337.ma>       +#+  +:+       +#+        */
+/*   By: rabia <rabia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 12:19:45 by rboulaga          #+#    #+#             */
-/*   Updated: 2025/03/23 10:23:35 by rboulaga         ###   ########.fr       */
+/*   Updated: 2025/04/06 09:18:47 by rabia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	my_cmp(char *s1, char *s2, size_t n)
 	size_t		i;
 
 	i = 0;
-	while (*s2 && *s2 == ' ')
+	while (*s2 && (*s2 == ' ' || *s2 == '	'))
 		s2++;
 	while (i < n && (s1[i] != '\0' || s2[i] != '\0'))
 	{
@@ -55,8 +55,10 @@ void	type_definition(t_map *map)
 			map->type = C;
 		else if (!my_cmp("1", map->line, 1))
 			map->type = MAPP;
-		else
+		else if (!my_cmp("\n", map->line, 1))
 			map->type = EMPTY;// i need to check that (go back)
+		else
+			map->type = NOTHING;
 		map = map->next;
 	}
 }
