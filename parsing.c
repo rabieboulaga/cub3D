@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rabia <rabia@student.42.fr>                +#+  +:+       +#+        */
+/*   By: rboulaga <rboulaga@students.1337.ma>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 10:41:53 by rboulaga          #+#    #+#             */
-/*   Updated: 2025/04/06 09:16:45 by rabia            ###   ########.fr       */
+/*   Updated: 2025/04/17 17:54:39 by rboulaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,7 @@ void parsing(int ac, char **av, t_data *data, t_map *map)
 		data->len = file_exists(av[1], data);
 		data_extraction(av[1], data, map);
 		take_map(data, map);
-		
-		// check_elements(data);
+		map_parsing(data, map);
 		printf("all is good\n");
 		exit(0);
 	}

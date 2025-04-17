@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rabia <rabia@student.42.fr>                +#+  +:+       +#+        */
+/*   By: rboulaga <rboulaga@students.1337.ma>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 14:39:57 by rboulaga          #+#    #+#             */
-/*   Updated: 2025/04/06 09:21:33 by rabia            ###   ########.fr       */
+/*   Updated: 2025/04/17 17:56:16 by rboulaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,14 @@
 
 typedef enum e_token
 {
-    NO,   // north texture 0
-    SO,   // south texture 1
-    WE,   // west texture 2
-    EA,   // east texture 3
-    F,    // floor color 4
-    C,    // ceiling color 5
-    MAPP,  // map data 6
-    EMPTY, // IMPTY LINE 7
+	NO,   // north texture 0
+	SO,   // south texture 1
+	WE,   // west texture 2
+	EA,   // east texture 3
+	F,    // floor color 4
+	C,    // ceiling color 5
+	MAPP,  // map data 6
+	EMPTY, // IMPTY LINE 7
 	NOTHING, // NULL 8
 } t_token;
 
@@ -55,13 +55,26 @@ typedef struct c_data
 	int len;
 	char *file;
 	int flag_no;
-    int flag_so;
-    int flag_we;
-    int flag_ea;
-    int flag_f;
-    int flag_c;
+	int flag_so;
+	int flag_we;
+	int flag_ea;
+	int flag_f;
+	int flag_c;
 	int flag_mapp;
 	int flag_empty;
+	char	*ea;
+	char	*so;
+	char	*we;
+	char	*no;
+	char	*f;
+	char	*c;
+	int		map_y;
+	int 	floor_r;
+	int		floor_g;
+	int		floor_b;
+	int 	ceiling_r;
+	int		ceiling_g;
+	int		ceiling_b;
 
 }	t_data;
 
@@ -84,6 +97,14 @@ void	check_it(t_map *map, t_data *data);
 void	check_arranging(t_data *data, t_map *map);
 void    take_map(t_data *data, t_map *map);
 void 	free_map(t_map *map);
+void	check_access(t_data *data, t_map *map);
+void remove_newline(char *str);
+void	check_f_rgb(t_data *data, t_map *map);
+void	check_c_rgb(t_data *data, t_map *map);
+long long		rgb_atoi(const char *str);
+void	preparing_elements(t_data *data, t_map *map);
+void	free_list(char **str);
+void	map_parsing(t_data *data, t_map *map);
 
 
 

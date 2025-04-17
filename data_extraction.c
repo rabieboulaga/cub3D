@@ -3,22 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   data_extraction.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rabia <rabia@student.42.fr>                +#+  +:+       +#+        */
+/*   By: rboulaga <rboulaga@students.1337.ma>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 12:19:45 by rboulaga          #+#    #+#             */
-/*   Updated: 2025/04/06 09:18:47 by rabia            ###   ########.fr       */
+/*   Updated: 2025/04/15 18:31:00 by rboulaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-// void	check_elements(t_map *map)
-// {
-	// int i;
-//
-	// i = 0;
-	// while (map->next && map->type != MAPP)
-// }
+void	free_list(char **str)
+{
+	int i;
+
+	i = 0;
+	if (!str)
+		return;
+	while(str[i])
+	{
+		free(str[i]);
+		i++;
+	}
+	free(str);
+}
 
 int	my_cmp(char *s1, char *s2, size_t n)
 {

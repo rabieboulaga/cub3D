@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_elements.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rabia <rabia@student.42.fr>                +#+  +:+       +#+        */
+/*   By: rboulaga <rboulaga@students.1337.ma>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 07:36:44 by rboulaga          #+#    #+#             */
-/*   Updated: 2025/03/30 15:58:21 by rabia            ###   ########.fr       */
+/*   Updated: 2025/04/17 00:06:01 by rboulaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	check_it(t_map *map, t_data *data)
 		|| data->flag_mapp != 1)
 	{
 		free_map(map);
-		my_exit(data, "Invalid map elements: missing or duplicated entries");
+		my_exit(data, "Invalid map elements: missing or duplicated entries\n");
 	}
 }
 

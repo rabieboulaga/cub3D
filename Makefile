@@ -11,6 +11,8 @@ SRC = main.c\
 	map_utils.c\
 	parse_elements.c\
 	take_map.c\
+	verify_utils.c\
+	map_parsing.c\
 	# check_elements.c\
 
 
