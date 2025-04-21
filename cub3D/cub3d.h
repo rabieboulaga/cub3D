@@ -6,7 +6,7 @@
 /*   By: rboulaga <rboulaga@students.1337.ma>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 14:39:57 by rboulaga          #+#    #+#             */
-/*   Updated: 2025/04/17 17:56:16 by rboulaga         ###   ########.fr       */
+/*   Updated: 2025/04/21 19:06:06 by rboulaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef struct c_data
 	char **map1;
 	char *str;
 	int	d;
+	int	help;
 	int fd;
 	int len;
 	char *file;
