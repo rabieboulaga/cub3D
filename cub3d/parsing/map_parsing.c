@@ -6,7 +6,7 @@
 /*   By: rboulaga <rboulaga@students.1337.ma>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 17:55:00 by rboulaga          #+#    #+#             */
-/*   Updated: 2025/05/05 20:26:15 by rboulaga         ###   ########.fr       */
+/*   Updated: 2025/05/05 22:44:57 by rboulaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,34 +17,23 @@ void	take_possitions(t_data *data ,int j, int i,char c)
 	data->player_x = j;
 	data->player_y = i;
 	data->view = c;
-
 }
 
 void	components(t_data *data, t_map *map)
 {
-	int i;
-	int j;
+	int y;
+	int x;
 
-	i = 0;
-	while(data->content[i])
+	y = 0;
+	while (data->content[y])
 	{
-		j = 0;
-		while(data->content[i][j])
+		x = 0;
+		while (data->content[y][x])
 		{
-			if (!ft_strchr("01NWSE", data->content[i][j]))
-			{
-				free_map(map);
-				free(data->content);
-				my_exit(data, "Invalid map: Map contains an invalid character\n");
-			}
-			if (ft_strchr("NWSE", data->content[i][j]))
-			{
-				data->help++;
-				take_possitions(data, j, i, data->content[i][j]);
-			}
-				j++;
+			check_map_char(data, map, x, y);
+			x++;
 		}
-		i++;
+		y++;
 	}
 }
 

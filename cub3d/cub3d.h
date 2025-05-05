@@ -6,7 +6,7 @@
 /*   By: rboulaga <rboulaga@students.1337.ma>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 14:39:57 by rboulaga          #+#    #+#             */
-/*   Updated: 2025/05/05 20:24:42 by rboulaga         ###   ########.fr       */
+/*   Updated: 2025/05/05 22:43:13 by rboulaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,6 +167,8 @@ long long		rgb_atoi(const char *str);
 void	preparing_elements(t_data *data, t_map *map);
 void	free_list(char **str);
 void	map_parsing(t_data *data, t_map *map);
+void	check_map_char(t_data *data, t_map *map, int x, int y);
+void	take_possitions(t_data *data ,int j, int i,char c);
 
 
 
