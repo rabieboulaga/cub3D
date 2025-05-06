@@ -6,7 +6,7 @@
 /*   By: rboulaga <rboulaga@students.1337.ma>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 14:39:57 by rboulaga          #+#    #+#             */
-/*   Updated: 2025/05/05 22:43:13 by rboulaga         ###   ########.fr       */
+/*   Updated: 2025/05/06 18:15:14 by rboulaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,10 @@
 #include <stdlib.h>
 #include <stdio.h>
 // #include "minilibx-linux/mlx.h"
+#include <errno.h>
+#include <string.h>
+#include <stdio.h>
+#include <fcntl.h>
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 1000
@@ -111,9 +115,6 @@ typedef struct c_data
 	int flag_c;
 	int flag_mapp;
 	int flag_empty;
-	int	player_x;
-	int	player_y;
-	char	view;
 	char	*ea;
 	char	*so;
 	char	*we;
@@ -167,8 +168,8 @@ long long		rgb_atoi(const char *str);
 void	preparing_elements(t_data *data, t_map *map);
 void	free_list(char **str);
 void	map_parsing(t_data *data, t_map *map);
-void	check_map_char(t_data *data, t_map *map, int x, int y);
-void	take_possitions(t_data *data ,int j, int i,char c);
+void	textures(char *s, t_data *data, t_map *map);
+
 
 
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   verify_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: youssef <youssef@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rboulaga <rboulaga@students.1337.ma>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 16:55:20 by rboulaga          #+#    #+#             */
-/*   Updated: 2025/04/28 18:50:50 by youssef          ###   ########.fr       */
+/*   Updated: 2025/05/06 18:13:31 by rboulaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,25 +77,30 @@ void	check_f_rgb(t_data *data, t_map *map)
 		my_exit(data, "Invalid RGB color format\n");
 	}
 }
+void	textures(char *s, t_data *data, t_map *map)
+{
+	int fd;
+
+	fd = open(s, O_RDONLY);
+	if (fd == -1)
+	{
+		close(fd);
+		free_map(map);
+		free(data->content);
+		my_exit(data, "Texture file does not exist or permission is denied\n");
+	}
+	close(fd);
+}
 
 void	check_access(t_data *data, t_map *map)
 {
 	int i;
 
 	i = 0;
-	if (access(data->ea, F_OK) != 0
-		|| access(data->we, F_OK) != 0
-		|| access(data->so, F_OK) != 0
-		|| access(data->no, F_OK) != 0
-		|| access(data->no, R_OK) != 0
-		|| access(data->so, R_OK) != 0
-		|| access(data->we, R_OK) != 0
-		|| access(data->ea, R_OK) != 0)
-	{
-		free_map(map);
-		free(data->content);
-		my_exit(data, "File does not exist or permission denied\n");
-	}
+	textures(data->we, data, map);
+	textures(data->ea, data, map);
+	textures(data->so, data, map);
+	textures(data->no, data, map);
 	while (data->content[i])
 	{
 		remove_newline(data->content[i]);

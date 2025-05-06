@@ -3,40 +3,52 @@
 /*                                                        :::      ::::::::   */
 /*   map_parsing.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rboulaga <rboulaga@students.1337.ma>       +#+  +:+       +#+        */
+/*   By: youssef <youssef@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 17:55:00 by rboulaga          #+#    #+#             */
-/*   Updated: 2025/05/05 22:44:57 by rboulaga         ###   ########.fr       */
+/*   Updated: 2025/04/28 18:50:50 by youssef          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-void	take_possitions(t_data *data ,int j, int i,char c)
-{
-	data->player_x = j;
-	data->player_y = i;
-	data->view = c;
-}
+// void	check_components(t_data *data, char *str)
+// {
+// 	int i;
+
+// 	i = 0;
+
+// 	while (str[i])
+// 	{
+// 		if (str[i] == '1')
+// 	}
+// }
 
 void	components(t_data *data, t_map *map)
 {
-	int y;
-	int x;
+	int i;
+	int j;
 
-	y = 0;
-	while (data->content[y])
+	i = 0;
+	data->help = 0;
+	while(data->content[i])
 	{
-		x = 0;
-		while (data->content[y][x])
+		j = 0;
+		while(data->content[i][j])
 		{
-			check_map_char(data, map, x, y);
-			x++;
+			if (!ft_strchr("01NWSE", data->content[i][j]))
+			{
+				free_map(map);
+				free(data->content);
+				my_exit(data, "Invalid map: Map contains an invalid character\n");
+			}
+			if (ft_strchr("NWSE", data->content[i][j]))
+				data->help++;
+			j++;
 		}
-		y++;
+		i++;
 	}
 }
-
 void	first_last_walls(t_data *data, t_map *map)
 {
 	int i;

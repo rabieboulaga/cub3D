@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: youssef <youssef@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rboulaga <rboulaga@students.1337.ma>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 10:41:53 by rboulaga          #+#    #+#             */
-/*   Updated: 2025/04/29 20:18:01 by youssef          ###   ########.fr       */
+/*   Updated: 2025/05/06 18:31:45 by rboulaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,10 @@ int file_exists(char *file, t_data *data)
 	i = 0;
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
-		my_exit(data, "Cannot access the file!\n");
+	{
+		close(fd);
+		my_exit(data, "Cannot access the file\n");
+	}
 	str = get_next_line(fd);
 	i++;
 	while (str)
@@ -62,7 +65,6 @@ void	check_extension(char *av, t_data *data)
 void parsing(int ac, char **av, t_data *data, t_map *map)
 {
 
-	// int j = 0;
 
 	if (ac == 2)
 	{

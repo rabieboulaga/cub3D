@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   init_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rboulaga <rboulaga@students.1337.ma>       +#+  +:+       +#+        */
+/*   By: youssef <youssef@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 18:30:42 by youssef           #+#    #+#             */
-/*   Updated: 2025/05/05 20:20:48 by rboulaga         ###   ########.fr       */
+/*   Updated: 2025/05/05 20:14:55 by youssef          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-#define PLAYER_SPEED 0.02
+#define PLAYER_SPEED 0.05
 
 
 double	rad(double angle)
@@ -69,7 +69,7 @@ void draw_3d_walls(t_data *data)
 		if (draw_end >= HEIGHT)
 			draw_end = HEIGHT - 1;
 
-
+	
 		int tex_index;
 		if (data->img->wall_directions[col] == 'N') tex_index = 0;
 		else if (data->img->wall_directions[col] == 'S') tex_index = 1;
@@ -90,7 +90,7 @@ void draw_3d_walls(t_data *data)
 		if (data->img->wall_directions[col] == 'W' || data->img->wall_directions[col] == 'S')
 			tex_x = tex->width - tex_x - 1;
 
-
+	
 		int y = 0;
 		while (y < HEIGHT)
 		{
@@ -119,7 +119,7 @@ void draw_view_ray(t_img *img, char **map)
 {
     int map_size = 64;
     int col = 0;
-
+	
 	while (col < WIDTH)
     {
         double ray_angle = img->player_angle - (FOV_ANGLE / 2.0) + (FOV_ANGLE * col / WIDTH);
@@ -129,7 +129,7 @@ void draw_view_ray(t_img *img, char **map)
         int map_x = (int)img->player_x;
         int map_y = (int)img->player_y;
 
-		//  1 3la ray_dirx hiya 1/cosx => cosx = x1-x2 /
+		//  1 3la ray_dirx hiya 1/cosx => cosx = x1-x2 / 
         double delta_dist_x = fabs(1 / ray_dir_x);
         double delta_dist_y = fabs(1 / ray_dir_y);
 
@@ -138,13 +138,13 @@ void draw_view_ray(t_img *img, char **map)
 			step_x = -1;
 		 else
 			step_x = 1;
-
+		
         int step_y;
 		if(ray_dir_y < 0)
 			step_y = -1;
 		else
 			step_y = 1;
-
+			
 		double side_dist_x = step_x;
 		if(step_x < 0)
             side_dist_x = (img->player_x - map_x) * delta_dist_x;
@@ -156,8 +156,8 @@ void draw_view_ray(t_img *img, char **map)
 			side_dist_y = (img->player_y - map_y) * delta_dist_y;
 		else
 			side_dist_y = (map_y + 1.0 - img->player_y) * delta_dist_y;
-
-
+	
+			
 
         int hit = 0;
         int side = 0; // 0: X side, 1: Y side
@@ -184,8 +184,8 @@ void draw_view_ray(t_img *img, char **map)
 			perp_wall_dist = side_dist_x - delta_dist_x;
 		else
 			perp_wall_dist = side_dist_y - delta_dist_y;
-
-
+		
+			
 		img->ray_distances[col] = perp_wall_dist * cos(ray_angle - img->player_angle);
         img->ray_angles[col] = ray_angle;
 
@@ -198,7 +198,7 @@ void draw_view_ray(t_img *img, char **map)
         // 2D
         double draw_x = img->player_x * map_size + map_size / 4;
         double draw_y = img->player_y * map_size + map_size / 4;
-
+		
 		int s = 0;
         while(s < perp_wall_dist * map_size)
         {
@@ -206,9 +206,9 @@ void draw_view_ray(t_img *img, char **map)
             int dy = (int)(draw_y + ray_dir_y * s);
             int color = 0xFF0000;
             if (side == 0)
-                color = (step_x < 0) ? 0x00FF00 : 0x0000FF;
+                color = (step_x < 0) ? 0x00FF00 : 0x0000FF; 
             else
-                color = (step_y < 0) ? 0xFFFF00 : 0xFF00FF;
+                color = (step_y < 0) ? 0xFFFF00 : 0xFF00FF; 
 
             my_mlx_pixel_put(img, dx, dy, color);
 			s++;
@@ -235,11 +235,11 @@ void square(t_img *img, char pixel, int x, int y)
 	start_y = y * size;
 	end_x = start_x + size;
 	end_y = start_y + size;
-
+	
 	if (pixel == '0')
-	color = 0x00000000;
+	color = 0x00000000; 
 	else if (pixel == '1')
-	color = 0xFFFFFFFF;
+	color = 0xFFFFFFFF; 
 	i = start_x + 1;
 	while(i < end_x-1)
 	{
@@ -283,7 +283,7 @@ void	draw(t_data *data, t_img *img)
 	int j;
 
 	img->wall_directions = malloc(sizeof(char) * WIDTH);
-
+	
 	i = 0;
 	while (data->content[i])
 	{
@@ -297,9 +297,9 @@ void	draw(t_data *data, t_img *img)
 	}
 	// player(img, data->content);
 	draw_view_ray(img, data->content);
-
+	
 	draw_3d_walls(data);
-
+	
 }
 
 
@@ -357,14 +357,14 @@ void move_back(t_data *data)
 {
 	if (data->img->key['s'])
 	{
-
+	
 		double next_x = data->img->player_x - cos(data->img->player_angle) * PLAYER_SPEED;
 		double next_y = data->img->player_y - sin(data->img->player_angle) * PLAYER_SPEED;
 
-
+		
 		if (data->content[(int)(next_y)][(int)(next_x)] != '1')
 		{
-
+			
 			data->img->player_x = next_x;
 			data->img->player_y = next_y;
 		}
@@ -418,8 +418,8 @@ int move_player(t_data *data)
 		data->img->player_angle -= 0.05;
 	if (data->img->key[65363])
 		data->img->player_angle += 0.05;
-
-
+	
+		
 	// printf("angle : %f\n", data->img->player_angle);
 	if (data->img->player_angle < 0)
 		data->img->player_angle += 2 * PI;
@@ -433,11 +433,11 @@ int move_player(t_data *data)
 	data->img->img_ptr = mlx_new_image(data->img->mlx, WIDTH, HEIGHT);
 	data->img->addr = mlx_get_data_addr(data->img->img_ptr, &data->img->bpp, &data->img->size_line, &data->img->endian);
 
-	draw(data, data->img);
+	draw(data, data->img); 
 
 	mlx_put_image_to_window(data->img->mlx, data->img->win, data->img->img_ptr, 0, 0);
 
-	return (1);
+	return (1);      
 }
 
 
@@ -454,7 +454,7 @@ void find_player_position(t_data *data)
 			{
 				data->img->player_x = j;
 				data->img->player_y = i;
-				data->img->facing = data->content[i][j];
+				data->img->facing = data->content[i][j];	
 				data->content[i][j] = '0';
 				return;
 			}
@@ -468,7 +468,7 @@ void texture_loading(t_data *data)
 {
 	char *paths[4] = { data->no, data->so, data->ea, data->we };
 	int i;
-
+	
 	i = 0;
 	while(i < 4)
 	{
@@ -481,7 +481,7 @@ void texture_loading(t_data *data)
 
 void render(t_data *data)
 {
-	data->img = malloc(sizeof(t_img));
+	data->img = malloc(sizeof(t_img));	
 	data->img->key = malloc(sizeof(char) * 70000);
 	data->img->player_angle =0.0;
 	data->img->ray_distances = malloc(sizeof(double) * WIDTH);
