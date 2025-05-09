@@ -6,7 +6,7 @@
 /*   By: rboulaga <rboulaga@students.1337.ma>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 17:55:00 by rboulaga          #+#    #+#             */
-/*   Updated: 2025/05/08 21:44:42 by rboulaga         ###   ########.fr       */
+/*   Updated: 2025/05/09 15:02:16 by rboulaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ void	map_parsing(t_data *data, t_map *map)
 	{
 		free_map(map);
 		free(data->content);
-		my_exit(data, "Invalid map: Invalid player position\n");
+		my_exit(data, "Invalid map\n");
 	}
 	first_last_walls(data, map);
 	walls(data, map);

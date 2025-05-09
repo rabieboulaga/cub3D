@@ -6,12 +6,33 @@
 /*   By: rboulaga <rboulaga@students.1337.ma>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 10:41:53 by rboulaga          #+#    #+#             */
-/*   Updated: 2025/05/09 02:07:46 by rboulaga         ###   ########.fr       */
+/*   Updated: 2025/05/09 15:58:00 by rboulaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 #include <unistd.h>
+
+void	change_spaces(t_data *data)
+{
+	int i;
+	int j;
+
+	i = 0;
+	j = 0;
+	while (data->content[i])
+	{
+		j = 0;
+		while(data->content[i][j])
+		{
+			if (is_space(data->content[i][j]))
+				data->content[i][j] = '1';
+			j++;
+		}
+		printf("%s\n", data->content[i]);
+		i++;
+	}
+}
 
 int file_exists(char *file, t_data *data, t_map *map)
 {
@@ -54,14 +75,14 @@ void	check_extension(char *av, t_data *data, t_map *map)
 	while (av[i])
 		i++;
 	i--;
-	while (av[i] != '.') // kjsdkjfs>.<cub
+	while (av[i] != '.') // filename>.<cub
 		i--;
 	if ((!av[i - 1]) || av[i - 1] == '/')
 	{
 		free(map);
 		my_exit(data, "invalid extension\n");
 	}
-	if (ft_strncmp(&av[i], ".cub", 4) != 0)
+	if (ft_strncmp(&av[i], ".cub", 5) != 0)
 	{
 		free(map);
 		my_exit(data, "invalid extension\n");
@@ -79,7 +100,8 @@ void parsing(int ac, char **av, t_data *data, t_map *map)
 		take_map(data, map);
 		map_parsing(data, map);
 		check_hole(data, map);
-		exit (0);
+		change_spaces(data);
+		exit(0);
 		return ;
 	}
 	free(map);

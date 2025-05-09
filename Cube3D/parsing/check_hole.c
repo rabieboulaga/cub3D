@@ -6,7 +6,7 @@
 /*   By: rboulaga <rboulaga@students.1337.ma>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 22:43:49 by rboulaga          #+#    #+#             */
-/*   Updated: 2025/05/09 03:57:36 by rboulaga         ###   ########.fr       */
+/*   Updated: 2025/05/09 14:45:18 by rboulaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,28 +24,22 @@ void 	hole_error(t_data *data, t_map *map)
 {
 	free_map(map);
 	free(data->content);
-	my_exit(data, "Invalid map");
+	my_exit(data, "Invalid map\n");
 }
-void		calcul(char *str, int j)
-{
-	int len;
 
-	len = ft_strlen(str);
-	printf("len of the next line=== %d\n,", len);
-	printf("len of the current line=== %d\n,", j);
-
-}
 int	valide_line(t_data *data, int i, int j)
 {
 	int len;
 
-	len = ft_strlen(data->content[i]);
-	// printf("%s\n", data->content[i]);
-	// printf("len of line = %d\n", len);
-	// printf("current position = %d\n", j);
-	if (j > i)
-		return 1;
-	return 0;
+	len = ft_strlen(data->content[i]);// len of line
+	if (len > j) // j is the index of '0' that we found
+	{
+		if (is_space(data->content[i][j]) == 1)
+			return 0;
+	}
+	else if (len <= j)
+		return 0;
+	return 1;
 }
 
 
@@ -55,16 +49,10 @@ void searx(int i, int j, t_data *data, t_map *map)
 		hole_error(data, map);
 	else if (is_space(data->content[i][j - 1]))
 		hole_error(data, map);
-
-
-	else if (valide_line(data, i + 1, j))
+	else if (valide_line(data, i + 1, j) == 0)
 		hole_error(data, map);
-
-
-	else if (valide_line(data, i - 1, j))
+	else if (valide_line(data, i - 1, j) == 0)
 			hole_error(data, map);
-
-	// calcul(data->content[i + 1], j);
 }
 
 void	check_hole(t_data *data, t_map *map)
