@@ -6,7 +6,7 @@
 /*   By: rboulaga <rboulaga@students.1337.ma>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 14:39:57 by rboulaga          #+#    #+#             */
-/*   Updated: 2025/05/06 18:15:14 by rboulaga         ###   ########.fr       */
+/*   Updated: 2025/05/09 02:05:03 by rboulaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,6 +169,8 @@ void	preparing_elements(t_data *data, t_map *map);
 void	free_list(char **str);
 void	map_parsing(t_data *data, t_map *map);
 void	textures(char *s, t_data *data, t_map *map);
+int		is_space(char c);
+void	check_hole(t_data *data, t_map *map);
 
 
 

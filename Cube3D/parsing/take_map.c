@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   take_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: youssef <youssef@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rboulaga <rboulaga@students.1337.ma>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 18:51:37 by rabia             #+#    #+#             */
-/*   Updated: 2025/04/28 18:50:50 by youssef          ###   ########.fr       */
+/*   Updated: 2025/05/08 22:22:59 by rboulaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,12 @@
 void	verify_map_elements(t_data *data, t_map *map)
 {
 	preparing_elements(data, map);
+	// printf("%s\n", data->f);
+	// exit(0);
 	check_access(data, map);
 	check_f_rgb(data, map);
 	check_c_rgb(data, map);
-	
+
 }
 
 void	take_elements(t_data *data, t_map *map)
@@ -55,6 +57,21 @@ void	take_it(t_data *data, t_map *map)
 	}
 	data->content[i] = NULL;
 }
+void 	right_wall(char *s,t_data *data, t_map *map)
+{
+	int i;
+
+	i = 0;
+	while(s[i] && is_space(s[i]))
+		i++;
+	if (!s[i])
+		return;
+	else if (s[i] == '0')
+	{
+		free_map(map);
+		my_exit(data, "Invalid element or enclosed wall\n");
+	}
+}
 void    Invalid_element(t_data *data, t_map *map, t_map *tmp)
 {
 	while(map->next && map->type == MAPP)
@@ -71,6 +88,7 @@ void    Invalid_element(t_data *data, t_map *map, t_map *tmp)
 		if (map->next == NULL)
 			return ;
 	}
+	right_wall(map->line, data, tmp);
 	free_map(tmp);
 	my_exit(data, "Invalid element in configuration file\n");
 }

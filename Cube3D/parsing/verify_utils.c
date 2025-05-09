@@ -6,7 +6,7 @@
 /*   By: rboulaga <rboulaga@students.1337.ma>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 16:55:20 by rboulaga          #+#    #+#             */
-/*   Updated: 2025/05/06 18:13:31 by rboulaga         ###   ########.fr       */
+/*   Updated: 2025/05/08 22:31:11 by rboulaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ void	textures(char *s, t_data *data, t_map *map)
 	fd = open(s, O_RDONLY);
 	if (fd == -1)
 	{
-		close(fd);
 		free_map(map);
 		free(data->content);
 		my_exit(data, "Texture file does not exist or permission is denied\n");
@@ -108,14 +107,20 @@ void	check_access(t_data *data, t_map *map)
 	}
 }
 
-
-char	*helper(char *str)
+char	*helper(char *str, t_data *data, t_map *map)
 {
 	int i;
 
 	i = 0;
+
 	while (str[i] && ft_isalpha(str[i]))
-		i++;
+	i++;
+	if(is_space(str[i]) == 0)
+	{
+		free_map(map);
+		free(data->content);
+		my_exit(data, "Invalid format (texture or RGB)\n");
+	}
 	while(str[i] && (str[i] == ' ' || str[i] == '	'))
 		i++;
 	str = &str[i];
@@ -124,15 +129,12 @@ char	*helper(char *str)
 
 void	preparing_elements(t_data *data, t_map *map)
 {
-	int i;
-
-	i = 0;
-	data->no = helper(data->no);
-	data->so = helper(data->so);
-	data->ea = helper(data->ea);
-	data->we = helper(data->we);
-	data->f = helper(data->f);
-	data->c = helper(data->c);
+	data->no = helper(data->no, data, map);
+	data->so = helper(data->so, data, map);
+	data->ea = helper(data->ea, data, map);
+	data->we = helper(data->we, data, map);
+	data->f = helper(data->f, data, map);
+	data->c = helper(data->c, data, map);
 	remove_newline(data->no);
 	remove_newline(data->ea);
 	remove_newline(data->we);

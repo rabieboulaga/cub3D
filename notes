@@ -1,0 +1,13 @@
+type definition (spaces NO spaces) 
+.cub(nothing else)
+open map in last line 
+11111111
+1111111
+1111111000001
+1111111
+1111111
+checktextures with mlx
+check rgb 
+draw empty spaces
+if the map can contain all types of spaces you should edit (check_walls, and check_map_characters)
+i need to check this case (f10,10,10)

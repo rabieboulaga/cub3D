@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data_extraction.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: youssef <youssef@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rboulaga <rboulaga@students.1337.ma>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 12:19:45 by rboulaga          #+#    #+#             */
-/*   Updated: 2025/04/28 18:50:13 by youssef          ###   ########.fr       */
+/*   Updated: 2025/05/09 02:36:15 by rboulaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,22 +48,22 @@ void	type_definition(t_map *map)
 {
 	while (map->next)
 	{
-		if(!my_cmp("NO ", map->line, 3))
+		if(!my_cmp("NO", map->line, 2))
 			map->type = NO;
-		else if(!my_cmp("SO ", map->line, 3))
+		else if(!my_cmp("SO", map->line, 2))
 			map->type = SO;
-		else if (!my_cmp("WE ", map->line, 3))
+		else if (!my_cmp("WE", map->line, 2))
 			map->type = WE;
-		else if(!my_cmp("EA ", map->line, 3))
+		else if(!my_cmp("EA", map->line, 2))
 			map->type = EA;
-		else if (!my_cmp("F ", map->line, 2))
+		else if (!my_cmp("F", map->line, 1))
 			map->type = F;
-		else if (!my_cmp("C ", map->line, 2))
+		else if (!my_cmp("C", map->line, 1))
 			map->type = C;
 		else if (!my_cmp("1", map->line, 1))
 			map->type = MAPP;
 		else if (!my_cmp("\n", map->line, 1))
-			map->type = EMPTY;// i need to check that (go back)
+			map->type = EMPTY;
 		else
 			map->type = NOTHING;
 		map = map->next;
@@ -83,7 +83,23 @@ void	get_elements(t_map *map, char *str)
 	map_add_back(&map, newnode);
 	(void)str;
 }
+void delete_spaces(t_map *map)
+{
+	t_map *tmp;
+	char *str;
 
+	tmp = map;
+	while (tmp->next)
+	{
+		if (tmp->type != MAPP)
+		{
+			str = ft_strtrim(tmp->line, " \t\n\v\r\f");
+			free(tmp->line);
+			tmp->line = str;
+		}
+		tmp = tmp->next;
+	}
+}
 
 void	data_extraction(char *file, t_data *data, t_map *map)
 {
@@ -98,11 +114,12 @@ void	data_extraction(char *file, t_data *data, t_map *map)
 		get_elements(map, str);
 		free(str);
 	}
+	close(data->fd);
 	type_definition(map);
+	delete_spaces(map);
 	check_number_of_elements(map, data);
 	check_it(map, data);
 	check_arranging(data, map);
-	close(data->fd);
 }
 
 

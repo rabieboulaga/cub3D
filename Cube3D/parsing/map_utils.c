@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: youssef <youssef@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rboulaga <rboulaga@students.1337.ma>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 10:28:46 by rboulaga          #+#    #+#             */
-/*   Updated: 2025/04/28 18:50:50 by youssef          ###   ########.fr       */
+/*   Updated: 2025/05/08 20:23:45 by rboulaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,20 @@ long long	rgb_atoi(const char *str)
 	res = 0;
 	if (!str)
 		return -1;
-	while (str[i])
+	while (str[i] && is_space(str[i]))
+		i++;
+	while (str[i] && is_space(str[i]) == 0)
 	{
-		if (str[i] >= '0' && str[i] <= '9')
+		if (str[i] >= '0' && str[i] <= '9')//      10   1,10,10
 			res = (res * 10) + (str[i] - 48);
 		else
 			return -1;
 		i++;
 	}
+	while(str[i] && is_space(str[i]))
+		i++;
+	if (str[i] != '\0')
+		return (-1);
 	if (res < 0 || res > 255)
 		return (-1);
 	return (res);

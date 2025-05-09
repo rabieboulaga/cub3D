@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_parsing.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: youssef <youssef@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rboulaga <rboulaga@students.1337.ma>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 17:55:00 by rboulaga          #+#    #+#             */
-/*   Updated: 2025/04/28 18:50:50 by youssef          ###   ########.fr       */
+/*   Updated: 2025/05/08 21:44:42 by rboulaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,15 @@
 // 		if (str[i] == '1')
 // 	}
 // }
+int		is_space(char c)
+{
+	if (c == ' ' || c == '\t'
+		|| c == '\n' || c == '\v'
+		|| c == '\r' || c == '\f')
+		return 1;
+	else
+		return 0;
+}
 
 void	components(t_data *data, t_map *map)
 {
@@ -36,7 +45,7 @@ void	components(t_data *data, t_map *map)
 		j = 0;
 		while(data->content[i][j])
 		{
-			if (!ft_strchr("01NWSE", data->content[i][j]))
+			if (!ft_strchr(" \t\n\v\f\r01NWSE", data->content[i][j]))
 			{
 				free_map(map);
 				free(data->content);
@@ -57,12 +66,12 @@ void	first_last_walls(t_data *data, t_map *map)
 	j = 0;
 	i = 0;
 	while(data->content[0][i] && (data->content[0][i] == '1'
-		|| data->content[0][i] == ' '))
+		|| is_space(data->content[0][i]) == 1))
 		i++;
 	while (data->content[data->map_y - 1][j])
 	{
 		if (data->content[data->map_y - 1][j] == '1'
-			|| data->content[data->map_y - 1][j] == ' ')
+			|| is_space(data->content[data->map_y - 1][j]))
 			j++;
 		else
 			break;
@@ -71,7 +80,7 @@ void	first_last_walls(t_data *data, t_map *map)
 	{
 		free_map(map);
 		free(data->content);
-		my_exit(data, "sssssssssInvalid map: map must be enclosed by walls\n");
+		my_exit(data, "Invalid map: map must be enclosed by walls\n");
 	}
 }
 
@@ -91,7 +100,7 @@ void	walls(t_data *data, t_map *map)
 				my_exit(data, "Invalid map: map must be enclosed by walls\n");
 			}
 		}
-			i++;
+		i++;
 	}
 }
 
