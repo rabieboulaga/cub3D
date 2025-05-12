@@ -6,7 +6,7 @@
 /*   By: rboulaga <rboulaga@students.1337.ma>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 14:39:57 by rboulaga          #+#    #+#             */
-/*   Updated: 2025/05/12 06:40:26 by rboulaga         ###   ########.fr       */
+/*   Updated: 2025/05/12 23:01:29 by rboulaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,6 @@
 
 #  include <math.h>
 
-#  define MAX_RAY_DISTANCE 1000
-#  define FOV_ANGLE PI / 3
-#  define DIST_TO_PLANE ((WIDTH / 2.0) / tan(FOV_ANGLE / 2))
-
 typedef struct s_img
 {
 	void			*mlx;
@@ -51,12 +47,10 @@ typedef struct s_img
 	double			player_x;
 	double			player_y;
 	double			player_angle;
-	// int 		N;
-	// int 		E;
-	// int			S;
-	// int			W;
-	char			facing;
 
+	char			facing;
+	double			*hit_x;
+	double			*hit_y;
 	int				ceiling_color;
 	int				floor_color;
 
@@ -162,6 +156,8 @@ int					move_player(t_data *data);
 int					get_color(int r, int g, int b);
 void				find_player_position(t_data *data);
 void				player_facing(t_img *img);
+void				wall_hit_point(t_img *img, t_ray *ray,
+						int col, double perp_wall_dist);
 
 // parsing functions
 void				parsing(int ac, char **av, t_data *data, t_map *map);
@@ -196,6 +192,7 @@ void				check_hole(t_data *data, t_map *map);
 void				take_it(t_data *data, t_map *map);
 char				*helper(char *str, t_data *data, t_map *map);
 int					rgb_help(char *str);
+void				txt_extension(char *av, t_data *data, t_map *map);
 
 # endif
 #endif

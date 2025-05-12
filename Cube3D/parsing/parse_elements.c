@@ -6,11 +6,30 @@
 /*   By: rboulaga <rboulaga@students.1337.ma>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 07:36:44 by rboulaga          #+#    #+#             */
-/*   Updated: 2025/05/12 06:21:24 by rboulaga         ###   ########.fr       */
+/*   Updated: 2025/05/13 00:20:18 by rboulaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+
+void	txt_extension(char *av, t_data *data, t_map *map)
+{
+	int	i;
+
+	i = ft_strlen(av);
+	if (i < 4)
+	{
+		free_map(map);
+		free(data->content);
+		my_exit(data, "Only '.xpm' files are supported\n");
+	}
+	if (ft_strncmp(av + i - 4, ".xpm", 4) != 0)
+	{
+		free_map(map);
+		free(data->content);
+		my_exit(data, "Only '.xpm' files are supported\n");
+	}
+}
 
 void	free_map(t_map *map)
 {

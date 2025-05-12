@@ -6,7 +6,7 @@
 /*   By: rboulaga <rboulaga@students.1337.ma>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 10:41:53 by rboulaga          #+#    #+#             */
-/*   Updated: 2025/05/12 06:23:02 by rboulaga         ###   ########.fr       */
+/*   Updated: 2025/05/13 00:18:13 by rboulaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,10 @@ void	parsing(int ac, char **av, t_data *data, t_map *map)
 		check_hole(data, map);
 		change_spaces(data);
 		data->map_struct = map;
+		txt_extension(data->no, data, map);
+		txt_extension(data->so, data, map);
+		txt_extension(data->we, data, map);
+		txt_extension(data->ea, data, map);
 		return ;
 	}
 	free(map);
