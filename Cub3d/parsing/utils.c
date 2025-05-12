@@ -6,7 +6,7 @@
 /*   By: rboulaga <rboulaga@students.1337.ma>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 23:21:41 by rboulaga          #+#    #+#             */
-/*   Updated: 2025/05/12 06:26:39 by rboulaga         ###   ########.fr       */
+/*   Updated: 2025/05/12 20:21:26 by rboulaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,15 @@ char	*helper(char *str, t_data *data, t_map *map)
 	int	i;
 
 	i = 0;
+	if (str[i] == 'F' || str[i] == 'C')
+	{
+		if (str[i] && (is_space(str[i + 1]) == 0))
+		{
+			free_map(map);
+			free(data->content);
+			my_exit(data, "Invalid format (texture or RGB)\n");
+		}
+	}
 	while (str[i] && ft_isalpha(str[i]))
 		i++;
 	if (is_space(str[i]) == 0)
